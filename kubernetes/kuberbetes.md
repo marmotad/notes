@@ -16,7 +16,7 @@
 >• cloud-controller-manager
 
 
-#• Node Components
+# Node Components
 >• kubelet
 >• kube-proxy
 >• Container Runtime
