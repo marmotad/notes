@@ -21,7 +21,7 @@
 >• kube-proxy
 >• Container Runtime
 
-# • Addons
+## • Addons
 
 >+ DNS
 >
@@ -55,6 +55,8 @@
  
 
 
+
+
 ## k8s api：REST API(主要依托Http/Https方法传输)
     resource(资源) --> objet（对象）
      
@@ -69,11 +71,36 @@
 ## 功能
     用于修改节点上的ipvs或者iptables规则
 
-证书
-
+## 证书
 + k8s使用双向证书认证
 
+![image-20210307195552049](kuberbetes.assets/image-20210307195552049.png)
 
+# kuberneter部署的两种方式
 
++ 二进制程序部署
++ Pod部署、
+  + Static pod
+  + Pod
 
+![image-20210307195832794](kuberbetes.assets/image-20210307195832794.png)
 
+# k8s 两种网络类型
+
++ overlay：叠加网络
+
++ underlay：承载网络
+
+![image-20210307200708396](kuberbetes.assets/image-20210307200708396.png)
+
+## CNI Container Network Interface
+
++ flannel
++ Project Calico
++ Canal（已废弃）
+
+![image-20210307202211029](kuberbetes.assets/image-20210307202211029.png)
+
+## CRI Container Runtime Interface
+
+## CSI Container Storage Interface
