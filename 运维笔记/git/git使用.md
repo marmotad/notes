@@ -465,7 +465,7 @@ origin	git@172.18.128.4:root/git-test.git (push)
 # origin ：用户名称
 ```
 
-7.10 新用户加入需要做的
+### 7.10 新用户加入需要做的
 
 ```
 [root@localhost ~]# mkdir /test
