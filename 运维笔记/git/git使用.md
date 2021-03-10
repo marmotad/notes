@@ -486,12 +486,7 @@ origin	git@172.18.128.4:root/git-test.git (fetch)
 origin	git@172.18.128.4:root/git-test.git (push)
 [root@localhost test]# git clone git@172.18.128.4:root/git-test.git
 Cloning into 'git-test'...
-remote: Enumerating objects: 16, done.
-remote: Counting objects: 100% (16/16), done.
-remote: Compressing objects: 100% (12/12), done.
-remote: Total 16 (delta 2), reused 0 (delta 0), pack-reused 0
-Receiving objects: 100% (16/16), done.
-Resolving deltas: 100% (2/2), done.
+
 [root@localhost test]# ls
 git-test
 [root@localhost test]# cd git-test/
