@@ -172,7 +172,7 @@ public class MaxToSmall {
 
 \+ - \* / % (取余)
 
-参与运算的数据与参与运算的数据类型相同（前提：参与运算的所有数据类型要相同）
++ 参与运算的数据与参与运算的数据类型相同（前提：参与运算的所有数据类型要相同,<font color='red'>**且buye和short的除外，byte + byte,byte+short,short+short的结果都是int**</font>）
 
 int + int == int
 
@@ -180,7 +180,7 @@ long + long == long
 
 ... ...
 
-参与运算的类型不同，结果类型为参与运算的数据类型中，大范围的值的类型相同
++ 参与运算的类型不同，结果类型为参与运算的数据类型中，大范围的值的类型相同
 
 long + byte == long
 
@@ -195,14 +195,10 @@ public class homework {
 //强制转换数据类型
 		System.out.println(f / 10);
 }
-}
+} 
 ```
 
-
-
-
-
-char做算数运算
+### 2.2 char做算数运算
 
 + \+ 用的较多，符号和数字用的多
 
