@@ -1,4 +1,4 @@
-# 相关文件
+# 1.1 anslble相关文件
 
 ```shell
 /usr/bin/ansible                        #命令行工具
@@ -13,7 +13,7 @@
 /etc/ansible/roles                      #角色存放处
 ```
 
-# Ansible系列命令
+# 1.2 Ansible系列命令
 
 ```shell
 ansible
@@ -25,7 +25,7 @@ ansible-galaxy
 ansible-pull
 ```
 
-## ansible-doc
+## 1.2.1 ansible-doc
 
 ```
 ansible-doc: 显示模块帮助
@@ -39,10 +39,11 @@ ansible-doc ping 查看指定模块帮助用法
 ansible-doc -s ping 查看指定模块帮助用法
 ```
 
-## ansible
+## 1.2.2 ansible
+
++ ansible通过ssh实现配置管理、应用部署、任务执行等功能，建议配置ansible端能基于密钥认证的方式联系各被管理节点
 
 ```shell
-ansible通过ssh实现配置管理、应用部署、任务执行等功能，建议配置ansible端能基于密钥认证的方式联系各被管理节点
 ansible <host-pattern> [-m module_name] [-a args]
 --version 显示版本
 -m module 指定模块，默认为command
@@ -57,7 +58,31 @@ ansible <host-pattern> [-m module_name] [-a args]
 -K, --ask-become-pass 提示输入sudo时的口令ansible的Host-pattern
 ```
 
-## ansible的Host-pattern
+### 1.2.3.3 ansable 常用模块
+
++ command：在远程主机执行命令，默认模块，可忽略-m选项
+  + ansible srvs -m command -a ‘service vsftpd start’
+  + ansible srvs -m command -a ‘echo magedu |passwd --stdin wang’
+    此命令不支持 $VARNAME < > | ; & 等，用shell模块实现
++ Shell：和command相似，用shell执行命令
+  + ansible srv -m shell -a ‘echo magedu |passwd –stdin wang’   调用bash执行命令
+  + 类似 cat /tmp/stanley.md | awk -F‘|’ ‘{print $1,$2}’ &> /tmp/example.txt 这些复杂命令，即使使用shell也可能会失败，解决办法：写到脚本时， copy到远程，执行，再把需要的结果拉回执行命令的机器
++ Script：在远程主机上运行ansible服务器上的脚本
+  + -a "/PATH/TO/SCRIPT_FILE“
+  + ansible websrvs -m script -a /data/f1.sh
+
+### 1.2.3.2 ansible使用示例
+
++ 以wang用户执行ping存活检测
+  + ansible all -m ping -u wang -k
++ 以wang sudo至root执行ping存活检测
+  + ansible all -m ping -u wang -k -b
++ 以wang sudo至mage用户执行ping存活检测
+  + ansible all -m ping -u wang -k -b --become-user=mage
++ 以wang sudo至root用户执行ls
+  ansible all -m command -u wang -a 'ls /root' -b --become-user=root -k -K  
+
+## 1.2.4 ansible的Host-pattern
 
 ```shell
 ansible的Host-pattern
@@ -85,7 +110,7 @@ ansible “websrvs:&dbsrvs” –m ping
 ansible “~(web|db).*\.magedu\.com” –m pingansible命令执行过程
 ```
 
-# ansible命令执行过程
+# 1.3 ansible命令执行过程
 
 1. 加载自己的配置文件 默认/etc/ansible/ansible.cfg
 2. 加载自己对应的模块文件，如command

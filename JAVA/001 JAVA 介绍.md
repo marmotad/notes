@@ -22,14 +22,17 @@
 ## 2.2 JRE
 
 + JRE 是支持Java程序运行的标准环境 。
-
 + JRE是运行环境，JDK是个开发环境。因此写Java程序的时候需要JDK，而运行Java程序的时候就需要JRE。而JDK里面已经包含了JRE，所以只要安装了JDK，就可以编辑Java程序，也可以正常运行Java程序。
+
+## 2.3 JVM 
+
++ JVM是java虚拟机，用于运行javac编译后端二进制程序
 
 ## 3 **Java**语言特点
 
 ## 3.1 编译和解释性
 
-### 3.1.1 编译性 
+### 3.1.1 编译性
 
 + 文件要执行，直接执行不了 （计算机不认识），需要进行编译，形成字节码文件  形成 计算机直接识别的文件 0和1 
 
@@ -44,14 +47,40 @@
 # 4 如何写java代码
 
 + 创建后缀名是.java的文件
++ 写java代码
+
+```java
+public class hello {
+//public class 文件名
+    //写代码内容，声明manin函数
+public static void main(String[]  args){
+    //java程序的入口地址,java虚拟机运行程序的时候首先找的就是main方法
+		System.out.println("hello world");
+}
+}
+```
+
+
 
 # 5 执行java代码
 
-## 5.1 编译 
+## 5.1 编译
 
 + 通过java自己的编译方式进行文件编译 
   + javac  java文件名.java （新的文件 字节码文件  .class）
 
+```powershell
+PS D:\JAVA> javac hello.java
+```
+
+
+
 ## 5.2解释执行
 
 + java文件名 
+
+```
+PS D:\JAVA> java hello
+hello world
+```
+
