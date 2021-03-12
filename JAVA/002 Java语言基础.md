@@ -80,17 +80,6 @@ Unicode 所有编码集（占用空间较大）
 
 Utf-8 ----编码集
 
-#### 1.5.1 定义字符串类型变量
-
-```
-public class chars {
-	public static void main (String[] args) {
-	char a = 'L';
-	System.out.println(a);
-}
-}
-```
-
 
 
 ### 1.6 bool值
@@ -168,6 +157,30 @@ public class MaxToSmall {
 
 ## 2、数据运算
 
+2.5.5.1结果是数字
+
+结果是boolean
+
+结果根据参与运算的数据格式
+
+参与运算的数据个数分类
+
+一元运算符
+
+参与运算的数据只有一个：!
+
+二元运算符
+
+参与运算的数据有两个
+
+& | >> <<  + - * /  += -+ *=  /+
+
+三元运算符
+
+参与运算的数据有三个
+
+
+
 ### 2.1 算数运算符
 
 \+ - \* / % (取余)
@@ -200,6 +213,8 @@ public class homework {
 
 ### 2.2 char做算数运算
 
+#### 2.2.1 直接打印int类型为字符串的变量值
+
 + \+ 用的较多，符号和数字用的多
 
 + 若参加运算的类型的字符，则会用编码集进行运算
@@ -212,7 +227,7 @@ public class Bools {
 }}
 ```
 
-执行结果
+###### 执行结果
 
 ```
 PS D:\JAVA> java Bools
@@ -221,27 +236,71 @@ PS D:\JAVA> java Bools
 
 + 若参与运算的是一个变量，结果的类型默认是int
 
+#### 2.2.2 定义字符串类型变量
+
+```
+public class chars {
+	public static void main (String[] args) {
+	char a = 'L';
+	System.out.println(a);
+}
+}
+```
+
+#### 2.2.3 字符串的算数运算
+
 编程常用数据类型：int，long，double
 
 面试常问：short、byte，float、char
 
-赋值运算符：
+##### 2.2.3.1 运算的直接是字符
 
-= ： int a = 1 ;
++ char类型的值对应ASCALL值，与数字相加，得到最终结果对应的值
 
-将1赋值给int 类型的a 
+```
+public class chars {
+	public static void main (String[] args) {
+	char b = '0' + 10;
+	System.out.println(b);
+}
+}
+```
 
+| ASCII值 | 控制字符 | ASCII值 | 控制字符 | 控制字符 | ASCII值 | 控制字符 |
+| ------- | -------- | ------- | -------- | -------- | ------- | -------- |
+| 16      | DLE      | 48      | 0        | P        | 112     | p        |
+| 26      | SUB      | 58      | :        | Z        | 122     | z        |
 
+###### 运行结果：
 
-数据运算：
+```powershell
+PS D:\JAVA> java chars
+:
+```
 
-+ 使用数字运算符和字符运算符
+##### 2.2.3.2 运算的是保存字符的变量
 
-复合运算符
+```java
+public class chars {
+	public static void main (String[] args) {
+	char c = '0';
+	int d = c + 1;
+//不能用char类型接收，否则会提示类型不兼容
+	System.out.print(d);
+}
+}
+```
 
-+= 、-=、 *= 、/=
+###### 运行结果：
 
-若一个式子中，出现了算数运算符和符合运算符，优先计算算数运算符。算数运算符优先级大于复合运算符
+```powershell
+PS D:\JAVA> java chars
+49
+```
+
+### 2.3 复合运算符
+
++ 若一个式子中，出现了算数运算符和符合运算符，<font color='red'>优先计算算数运算符。</font>算数运算符优先级大于复合运算符
 
 ```java
 public class test {
@@ -253,7 +312,7 @@ int e = 2;
 }}
 ```
 
-运算结果：
+###### 运算结果：
 
 ```java
 PS D:\JAVA> javac .\test.java
@@ -262,6 +321,10 @@ PS D:\JAVA> java test
 ```
 
 
+
+数据运算：
+
++ 使用数字运算符和字符运算符
 
 若使用了符合运算符，进行运算，在自己本时的基础上进行的运算，<font color='red'>**数据类型不会发生变化**</font>
 
@@ -274,23 +337,21 @@ public class test {
 }}
 ```
 
+### 2.4 数据运算
 
-
-### 数据范围
-
-数字符合
+#### 2.4.1 数字的符号
 
 +、-可以表示数字的正负
 
-结合变量
+#### 2.4.2 结合变量
 
 ++、-- ，表示自增、自减，在当前变量的基础上+/-1，可以放在<font color='red'>变量前面</font>，或者<font color='red'>变量后面</font>
 
-在变量前面和后面的区别
+##### 2.4.2.1 在变量前面和后面的区别
 
-在变量前面，先用变量值，后加1
++ <font color='red'>写在变量前面</font>，先用变量值，后加1
 
-在变量后面，先加1，后用变量值
++ <font color='red'>写在变量后面</font>，先加1，后用变量值
 
 ```java
 public class test {
@@ -298,6 +359,7 @@ public class test {
 		byte a = 120 ;
 		System.out.println(a++);
 		System.out.println(a);
+        System.out.println(a++);
 }}
 ```
 
@@ -305,11 +367,18 @@ public class test {
 PS D:\JAVA> java test
 120
 121
+121
 ```
 
+赋值运算符：
 
+= ： int a = 1 ;
 
-数字间的运算（关系运算），结果为bol类型
+将1赋值给int 类型的a 
+
++= 、-=、 *= 、/=
+
+数字间的运算（关系运算），结果为bool类型
 
 表示数字间关系
 
@@ -317,20 +386,173 @@ PS D:\JAVA> java test
 
 + 关系运算符一次只能比较一个式子是否成立，若来连续比较需要使用逻辑运算符
 
-逻辑运算符
+### 2.5 关系运算
+
+#### 2.5.1 逻辑运算符
 
 用来连接多个关系运算表达式（a + b a + b - 1 a * b a > b）
 
 语句结束表示完成的一句话 赋值
 
-#### 表达式
+#### 2.5.2 表达式
 
-短路与运算：当全部结果为true时，结果为true，否则为false
+短路与和短路或
+
+##### 2.5.2.1 短路与运算：
+
+当全部结果为true时，结果为true，否则为false
 
 + 前面的如执行失败，整个表达式是false，后面的不会执行
 
-短路或运算：
+##### 2.5.2.2 短路或运算：
 
 至少有一个表达式成立，结果为true，否则为false
 
 + 前面的如执行成功，整个表达式是true，后面的不会执行
+
+2.5.3 全路与和全路或
+
+& | 是全路运算符，无论前面表达式是否可以决定整个表达式结果，都继续执行后面语句
+
+全路与
+
++ 取决于参与运算的数据类型
+
+2.5.4 移位
+
+<<：左移 
+
+\>>：右移
+
+```
+public class test1 {
+	public  static void main (String[] args) {
+	int a = 5;
+	System.out.println(a >> 1);
+	System.out.println(a << 1);
+}
+}
+```
+
+2.5.5 三目运算符
+
+格式：结果是boolean类型的表达式？
+
+参与运算的结果取决于前两个值
+
+判断前面的表达式是否成立，若成立表达式结果为值1，不成立则为值2
+
+```java
+public class test1 {
+    public static void main (String[] args) {
+        int a = 10;
+        int b = 20;
+        System.out.print(a>b?20:true);
+        System.out.print(a<b?20:true);
+    }
+}
+```
+
+希望实现若前面的表达式成立，则执行前一部分 的代码，并把值赋给结果，否则执行第二部分的代码，赋给表达式的结果
+
+流程控制语句
+
+
+
+
+
+#### 2.6 字符串类型
+
+String ,值需要使用“”赋值
+
+##### 2.6.1 String与字符的拼接
+
++ 使用+ 是字符串拼接
+
+```java
+public class test1 {
+	public  static void main (String[] args) {
+	String b = "a" + "b";
+	System.out.print(b);
+}
+}
+```
+
+
+
+```
+PS D:\JAVA> java test1
+ab
+```
+
+分支语句
+
+1 if
+
+一个条件
+
+```java
+if (条件 boolean类型) {
+    若条件成立，执行{
+        
+    } 
+}    
+```
+
+两个条件
+
+```java
+if (条件 boolean类型) {
+    若条件成立，执行{
+        
+    } else {
+        代码
+    }
+}    
+```
+
+多个条件
+
+```java
+if (条件 boolean类型) {
+    若条件成立，执行{
+        
+    } else if (条件) {
+        代码
+    } else {
+    }
+}    
+```
+
+
+
+swich case 
+
+  和 case 后的值比较
+
+值只可以为byte，short，int，char，String
+
+```java
+switch (值) {
+    case 值:
+         代码
+    break:
+  }
+```
+
++ case比default优先级高
++ default可以放在case前，但是还是会先执行case
+
+```java
+switch 变量a {
+    case a == 1:
+         代码
+    break:
+    //强制终止当前循环
+    default:
+    //若值都不相等，执行default代码
+  }
+```
+
+case穿透：忘记写break会导致case一直向下执行，直到遇到break，或者switch
+
