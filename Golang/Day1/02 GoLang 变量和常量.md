@@ -228,7 +228,7 @@ fmt.Print(NAME,NAME1,NAME2,NUM,NUM1,NUM2)
 
 ### 2.6 枚举
 
-\#go中默认没有枚举类型，可以使用const+iota
++ go中默认没有枚举类型，可以使用const+iota
 
 ```
 package main
