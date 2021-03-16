@@ -633,13 +633,7 @@ arr[4] = 10;
 判断第一个位置和第二个位置的值的大小，
 
 ```java
-package git.fanyang.zone;
-
-import java.util.Arrays;
-
-public class sort {
     public static void main(String[] args) {
-
         int[] sorts = {1, 20, 0, 80};
         for (int j = 0; j < sorts.length-1; j++) {
             for (int i = 0; i < sorts.length - 1; i++) {
@@ -658,6 +652,5 @@ public class sort {
 
     }
 }
-
 ```
 
