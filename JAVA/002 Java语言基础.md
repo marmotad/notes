@@ -677,6 +677,8 @@ arr[4] = 10;
 
 # 5 方法
 
++ 方法公开化（用public修饰，代表类外面可调用）
+
 ## 5.1 方法的格式
 
 + 具有某种功能的代码，例如main具有程序入口方法的功能
@@ -721,6 +723,8 @@ public static void 方法名(数据类型 变量名)   ----- 方法的声明
 如果需要得到方法中的数据，继续做其他操作，该方法需定义成有返回值的方法
 
 ## 5.3 定义方法
+
++ 方法用
 
 ```java
     private static void sorts(int[] sorts) {
@@ -788,8 +792,6 @@ public class 文件名 {
 
 7.3 基于类创建数据
 
-=======
->>>>>>> 384fd961ca7c9f9bbed246f9e82978d497ec54e4
 ```
 new 类名() ;
 数据类型 变量名 = 值;
@@ -799,12 +801,11 @@ new 类名() ;
 7.4 对象
 
 + 对象是类的一个实例
++ 对象在创建时要符合Java的创建语法，与数组相似
 
 ```
-Cat c = 
+Cat c = new Cat();
 ```
-
-
 
 7.4 赋值和取值
 
@@ -825,11 +826,107 @@ c.type = "dddd"
 System.out.print(c.name)
 ```
 
-
-
 类的分类
 
 1、含有main方法的类：测试类
 
 2、描述类的特征：特征类
+
+7.4.3 给特征赋值
+
++ 创建后会有默认值，与数组默认值相同
+
+```
+public class age {
+    int a,age ;
+    public void setA(int a){
+        if (a > 0) {
+            age = a;
+        } else {
+            age = 1;
+        }
+    }
+}
+```
+
+7.4.4 引用特征类的方法
+
+```java
+public class test {
+    public static void main(String[] arga) {
+        age a = new age();
+        a.setA(-1);
+        System.out.println(a.age);
+    }
+}
+```
+
+
+
+7.4.5 属性私有化
+
+禁止在测试类中使用.变量名的方式赋值
+
+private是java中表示私有的一个修饰符
+
+一个类中写的数据，只能在当前类中使用，出了类不能用
+
+若设置了private，不能在特征类引用，不能在测试类中调用
+
+若要获取特征上的值使用需要设置get方法
+
+```java
+public class age {
+    private int a,age ;
+    public void setA(int a){
+        if (a > 0) {
+            age = a;
+        } else {
+            age = 0;
+        }
+    }
+    //在类中获取值,并返回
+    public int getA() {
+           return age;
+    }
+}
+```
+
+7.4.6 获取值的方法
+
+```java
+public class test {
+    public static void main(String[] arga) {
+        age b = new age();
+        b.setA(-1);
+        System.out.println(b.getA());
+    }
+}
+```
+
+7.4.7 类中变量的作用域
+
+如果在当前类中都能生效的变量叫全局变量
+
+如果在方法中定义的变量叫局部变量
+
+若局部变量和全局变量重名，遵循就近原则
+
+7.4.8 属性和局部变量区分
+
+this代表当前对象，不是固定的，取决于谁调用了方法
+
+7.4.9 拼接
+
++ 类中定义一个方法去调用方法打印
++ 如果在一个类中没有写toSting的方法，打印的是地址，如果写了toString的方法，打印的是返回值
+
++ 使用toString方法调用
+
+```
+//打印对象时，默认调用
+public String toString() {
+        return "年龄" + age;
+    }
+```
 
