@@ -654,13 +654,7 @@ arr[4] = 10;
 判断第一个位置和第二个位置的值的大小，
 
 ```java
-package git.fanyang.zone;
-
-import java.util.Arrays;
-
-public class sort {
     public static void main(String[] args) {
-
         int[] sorts = {1, 20, 0, 80};
         for (int j = 0; j < sorts.length-1; j++) {
             for (int i = 0; i < sorts.length - 1; i++) {
@@ -746,6 +740,7 @@ public static void 方法名(数据类型 变量名)   ----- 方法的声明
 
     }
 }
+<<<<<<< HEAD
 ```
 
 ## 5.3 调用自定义方法
@@ -793,6 +788,8 @@ public class 文件名 {
 
 7.3 基于类创建数据
 
+=======
+>>>>>>> 384fd961ca7c9f9bbed246f9e82978d497ec54e4
 ```
 new 类名() ;
 数据类型 变量名 = 值;
