@@ -766,17 +766,53 @@ public static void 方法名(数据类型 变量名)   ----- 方法的声明
 
 ## 6.1 二分查找
 
+
+
 ## 6.2 统一输出
 
 在查找时，进行查找数据值的返回，若查找到数据就返回查找到数据的下标，否则返回一个-1
 
-7 类
+```java
+public class find {
+    public static void find(int[] arr, int findNum) {
+        int start = 0;
+        int end = arr.length - 1;
+        while (start <= end) {
+            //start : 开始查找的数组的最小索引；end：数组结束的索引；half：数组为查找的元素的中间索引
+            int half = (start + end) / 2;
+            if (findNum == arr[half]) {
+                //如果数组中间索引对应的数自是要查找的数字，则查找到值，并返回
+                System.out.println(arr[half]);
+                return;
+            } else if (findNum > arr[half]) {
+                //如果查找的数字比数组中间索引的值大，则中间的索引加1
+                start = half + 1;
+            } else if (findNum < arr[half]) {
+                end = half - 1;
+                //如果查找的数字比数组中间索引的值小，则结开始的索引减1
+            }
+        }
+        //return -1;
+    }
 
-7.1 JAVA存储数据流程
+
+    public static void main(String[] args) {
+        int[] arrs = {89,91,97,456};
+        find(arrs, 456);
+    }
+}
+```
+
+# 7 类
+
++ 类中封装了某个方法具体的实现
++ 使用时 通过对象 只是使用了方法 做了方法的调用，此时我们看不到方法的具体实现是什么
+
+## 7.1 JAVA存储数据流程
 
 + 创建.java的文件
 
-7.2 声明类
+### 7.2 声明类
 
 + 类是一个数据类型
 
@@ -790,7 +826,7 @@ public class 文件名 {
 }
 ```
 
-7.3 基于类创建数据
+### 7.3 基于类创建数据
 
 ```
 new 类名() ;
@@ -798,7 +834,7 @@ new 类名() ;
 
 ```
 
-7.4 对象
+### 7.4 对象
 
 + 对象是类的一个实例
 + 对象在创建时要符合Java的创建语法，与数组相似
@@ -807,9 +843,9 @@ new 类名() ;
 Cat c = new Cat();
 ```
 
-7.4 赋值和取值
+### 7.5 赋值和取值
 
-7.4.1赋值
+### 7.5.1赋值
 
 + 在对应的特征的位置上进行数据的输入 
 
@@ -820,19 +856,19 @@ c.age = 1;
 c.type = "dddd"
 ```
 
-7.4.2 取值
+### 7.5.2 取值
 
 ```
 System.out.print(c.name)
 ```
 
-类的分类
+## 7.6 类的分类
 
 1、含有main方法的类：测试类
 
 2、描述类的特征：特征类
 
-7.4.3 给特征赋值
+### 7.6.1 给特征赋值
 
 + 创建后会有默认值，与数组默认值相同
 
@@ -849,7 +885,7 @@ public class age {
 }
 ```
 
-7.4.4 引用特征类的方法
+### 7.6.2引用特征类的方法
 
 ```java
 public class test {
@@ -861,19 +897,15 @@ public class test {
 }
 ```
 
+### 7.6.3属性私有化
 
++ 禁止在测试类中使用.变量名的方式赋值
 
-7.4.5 属性私有化
++ 一个类中写的数据，只能在当前类中使用，出了类不能用
 
-禁止在测试类中使用.变量名的方式赋值
++ private是java中表示私有的一个修饰符，若设置了private，不能在特征类引用，不能在测试类中调用
 
-private是java中表示私有的一个修饰符
-
-一个类中写的数据，只能在当前类中使用，出了类不能用
-
-若设置了private，不能在特征类引用，不能在测试类中调用
-
-若要获取特征上的值使用需要设置get方法
++ 若要获取特征上的值使用需要设置get方法
 
 ```java
 public class age {
@@ -892,7 +924,7 @@ public class age {
 }
 ```
 
-7.4.6 获取值的方法
+### 7.6.4 获取值的方法
 
 ```java
 public class test {
@@ -904,7 +936,7 @@ public class test {
 }
 ```
 
-7.4.7 类中变量的作用域
+### 7.6.5 类中变量的作用域
 
 如果在当前类中都能生效的变量叫全局变量
 
@@ -912,21 +944,152 @@ public class test {
 
 若局部变量和全局变量重名，遵循就近原则
 
-7.4.8 属性和局部变量区分
+### 7.6.7 属性和局部变量区分
 
 this代表当前对象，不是固定的，取决于谁调用了方法
 
-7.4.9 拼接
+### 7.6.8 给当前对象赋值
+
+```java
+public class age {
+    private int age ;
+    public void setA(int age){
+        if (this.age > 0) {
+            this.age = age;
+        } else {
+            this.age = 0;
+        }
+```
+
+### 7.6.8拼接
 
 + 类中定义一个方法去调用方法打印
 + 如果在一个类中没有写toSting的方法，打印的是地址，如果写了toString的方法，打印的是返回值
 
 + 使用toString方法调用
 
-```
+```Java
 //打印对象时，默认调用
 public String toString() {
         return "年龄" + age;
     }
 ```
+
+###  7.7 构造对象
+
+在Java中创建了一个类，在类中，存在一个默认的方法，方法名为 类名+（）
+
+只能放在new后进行对象创建，new后也不可以放其他的
+
+类名前不能加返回值类型，否则就不是方法了
+
+### 7.7.1 构造方法
+
+#### 7.7.1.1 默认构造方法：
+
++ 一个类中只能有一个构造方法，若手动定义了构造方法，默认的会失效
+
+```Java
+public 类名() {
+	  ^ 不能加返回值类型，否则就不是方法了
+//方法体
+}
+```
+
+#### 7.7.1.2 创建对象并对属性赋值
+
+##### 7.7.1.2.1 在类中定义方法
+
+```java
+    public Student () {
+
+    }
+//定义无参的方法
+    public Student (String name, byte score, short num) {
+        this.name = name;
+        this.score = score;
+        this.num = num;
+    }
+//定义有参的方法
+```
+
+##### 7.7.1.2.2 方法重载
+
++ 在同一个类中定义多个方法，方法名相同，但是参数列表不同
++ 方法重载只要符合重载的条件就是方法重载，可以是普通的方法，也可以是构造方法
+
+> 1、参数个数不同
+>
+> 2、参数类型不同
+>
+> 3、类型顺序不同
+
+### 7.7.2 构造方法间调用
+
+#### 7.7.2.1 普通方法间的调用
+
+```java
+    public void a () {
+        System.out.println("a的无参方法");
+        a(2);
+    }
+
+    public void a(int a) {
+        System.out.println("a的有参方法");
+
+    }
+```
+
+#### 7.7.2.2 构造方法间的调用
+
++ 通过this进行构造方法间的调用
++ this必须放在构造方法里，且必须是构造方法体第一句
++ this可以自己调自己，但是必须加条件，否则会溢出、
++ 构造方法可以调用普通方法，但普通方法不能调用构造方法
++ 多个参数的构造方法可以调用少个参数的构造方法，在多个参数里书写逻辑
++ 少参数的构造方法可以调用多参数的构造方法
+
+```java
+    public Student (String name, byte score, short num) {
+        this();//调用当前类中的构造方法
+    }
+```
+
+## 7.8 继承
+
++ 继承发生在类和类之间
+
++ 通过extens指定父类。若没有指定父类，默认继承Object
++ 父类
+
+```java
+package git.cncf.online.day10;
+
+public class publicClass {
+    protected String name;
+    protected byte age;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+```
+
++ 子类
+
+```java
+public class Student extends publicClass {
+    //子类中的代码
+}
+```
+
+
+
+## 7.8 面向对象语言的特性
+
+
 
