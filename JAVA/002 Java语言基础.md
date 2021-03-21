@@ -1017,6 +1017,7 @@ public 类名() {
 
 + 在同一个类中定义多个方法，方法名相同，但是参数列表不同
 + 方法重载只要符合重载的条件就是方法重载，可以是普通的方法，也可以是构造方法
++ 可以根据传入的参数自动的选择要使用现有的方法，还会自动进行大范围的数据转换
 
 > 1、参数个数不同
 >
@@ -1057,8 +1058,9 @@ public 类名() {
 
 ## 7.8 继承
 
-+ 继承发生在类和类之间
+### 7.8.1 继承
 
++ 继承发生在类和类之间
 + 通过extens指定父类。若没有指定父类，默认继承Object
 + 父类
 
@@ -1087,9 +1089,299 @@ public class Student extends publicClass {
 }
 ```
 
+### 7.8.2 super
+
+#### 7.8.2.1 super 关键字
+
++ 就近原则
+
+> 调用方法时，先在自己的类中找需要执行的方法，找不到去父类中查找
+>
+> 实际执行时，先加载父类，再加载子类，子类是父类的扩展
+
++ 如果在子类中调用和父类中同名的方法 ，需要使用super去调用父类中的方法
++ 如果子类中没有这个方法，底数父类中有，可用省略super
+
+#### 7.8.2.2 super()
+
++ 用于调用父类中的构造方法
++ super必须放在构造方法体的第一句
++ super无法和this同时存在
+
+```java
+public Student (String name, byte score, short num) {
+	super();
+}
+
+public xxx() {
+    super();
+}
+```
+
+#### 7.8.2.2 父类和子类
+
++ 拥有的共同特征，父类表示的数据范围大
++ 子类是在父类基础上的扩展，做了具体类型的指定
+
+#### 7.8.2.3 范围转换
+
++ 父类的范围比子类的范围大
+
+##### 7.8.2.3.1 向上转型（隐藏子类中扩展的功能）
+
++ 子类转父类（直接转换）
++  向上转型后<font color="red">子类的特征依然存在，但是父类不能调用</font>
++ 子类扩展的特征对父类来说是隐藏的
+
+```java
+Cat cat = new();
+Animal animal = cat;
+//或者
+Animal animal = new cat();
+```
+
+##### 7.8.2.3.2 向上转型的应用
+
+###### 7.8.2.3.2.1 赋值的向上转型
+
++ 逻辑相同但参数不同的代码多次出现，参数都是同一个父类
+
+```java
+方法 (父类类型 变量名名) {
+}
+```
+
+###### 7.8.2.3.2.2 传参的向上转型
+
++ 通过传参的方式，用父类接受子类对
+
+```
+package git.cncf.online.day11;
+
+import git.cncf.online.day11.homewark.Animal;
+
+public class test11 {
+    public static void main(String[] args) {
+        b(new Cat("tom",88,"白色"));
+        b(new dog("来福",55,"白色")); 
+        }
+
+    private static void b(Animal cat) {
+        System.out.println("================");
+        System.out.println(cat);
+        System.out.println("================");
+
+    }
+}
+```
+
+
+
+##### 7.8.2.3.3 动态绑定
+
++ 程序运行时，识别变量中存放的数据的实际类型，找到实际类型中的方法做方法调用
+
+![image-20210321212442507](002 Java语言基础.assets/image-20210321212442507.png)
+
+##### 7.8.2.3.4 方法重写
+
++ @override会标识方法重写
+
++ 类是具有相同特征和行为的一类事物 
+
++ 子类和父类拥有相同的方法，但方法体不同
+
++ 子类<font color="red">继承父类，参数列表相同，返回值相同</font>访问权限修饰符不同，<font color="red">称为方法重写</font>
++ 向上转型后，方法调用时，会进行动态绑定，都是子类特征中符合自己的特征行为，而不会执行父类的方法体（父类的方法体多余，执行不到）
++ 子类必须手动写方法才能实现重写（使用抽象方法提示子类需要方法重写）
+
+```java
+####cat
+package git.cncf.online.day11;
+
+public class Cat extends Animal {
+        private String type ;
+        public void run(){
+                System.out.println("cat可以跑");
+        }
+}
+
+####dog
+import git.cncf.online.day11.Animal;
+
+public class dog extends Animal {
+    private String type ;
+    public void run(){
+        System.out.println("dog跑的很快");;
+    }
+}
+
+####animal
+package git.cncf.online.day11;
+
+public class Animal {
+    private String name;
+    private int age;
+
+    public Animal () {
+    }
+
+    public Animal (String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public void run(){
+        System.out.println("动物可以跑");
+    }
+
+}
+
+####test
+
+
+package git.cncf.online.day11;
+
+public class test11 {
+    public static void main(String[] args) {
+        b(new Cat());
+        b(new dog());
+    }
+
+    private static void b(Animal animal) {
+        System.out.println("================");
+        animal.run();
+        System.out.println("================");
+
+    }
+}
+```
+
+###### 运行结果
+
+```powershell
+================
+cat可以跑
+================
+================
+dog跑的很快
+================
+```
+
+#### 7.8.2.4 抽象方法
+
++ 只有方法声明没有方法体
++ 需要使用abstract修饰
++ <font color="red">抽象方法必须在抽象类中</font>，但是抽象类中不影响有抽象方法
++ 通过子类对父类进行标识
+
+```java
+# 父类定义抽象方法
+package git.cncf.online.day11;
+
+public abstract class Animal {
+    private String name;
+    private int age;
+
+    public Animal () {
+    }
+
+    public abstract void run();
+}
+
+# 子类中创建抽象方法
+package git.cncf.online.day11;
+
+public class Cat extends Animal {
+        private String type ;
+        @Override
+        public void run(){
+                System.out.println("cat可以跑");
+        }
+}
+```
+
+#### 7.8.2.5 访问权限修饰符
+
++ 设定变量的有效作用范围
++ <font color="red">子类的权限要大于等于父类的权限</font>
+
+|            | 不同的包 | 不同包下的子类 | 相同的包 | 当前类 |
+| ---------- | -------- | -------------- | -------- | ------ |
+| public     | 可以     | 可以           | 可以     | 可以   |
+| protected  | 不可以   | 可以           | 可以     | 可以   |
+| 默认修饰符 | 不可以   | 不可以         | 可以     | 可以   |
+| private    | 不可以   | 不可以         | 不可以   | 可以   |
+
+实现
+
+implements
+
+类实现另一个类中的抽象方法
+
+子类继承了抽象类，实现逻辑
+
+
+
 
 
 ## 7.8 面向对象语言的特性
+
+
+
+8 接口类型
+
+接口注重的是方法
+
+8.1接口定义
+
+接口中的方法，默认是抽象方法，默认使用public abstract修饰
+
+```java
+public interface 接口名 {
+    void per ();
+    //接口名
+}
+```
+
+接口中都是抽象方法，通过类进行具体实现
+
+类（实现类）实现接口（父接口）
+
+一个类乐园实现多各接口
+
+接口和接口间是多继承的关系
+
+```java
+pbulic class 类名 implements 接口名 () {
+    public void 
+}
+```
+
+
+
+|      | 类       | 接口       |
+| ---- | -------- | ---------- |
+| 类   | 单根继承 | 类实现接口 |
+| 接口 |          | 多继承     |
+
+static 
+
++ 加载类-->创建对象-->分配内存-->使用
+
+static 优先加载，被static修饰的内容会被优先加载
+
+static会优先分配内存，随着类的加载就进行了内存的分配
+
+当在main方法中，通过变量指向了对象的地址，对象分配好了内存空间，就可以使用了
+
+只有一个对象分片好了内存空间，才可以进行使用
+
+static修饰的内容需要通过类进行调用，通过类调用的方法称为类方法，变量称为类变量
+
+如果调用的是本类的方法，类可以省略，调用的是其他类中的方法，类不可以省略
+
+![image-20210321165613836](002 Java语言基础.assets/image-20210321165613836.png)
 
 
 
