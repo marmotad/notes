@@ -2,7 +2,7 @@
 
 常量：值不能改变
 
-常量：值可以改变
+变量：值可以改变
 
 数据类型：变量值的类型，如整数、小数、字母... ...
 
@@ -1268,6 +1268,41 @@ dog跑的很快
 ================
 ```
 
+##### 7.8.2.3.5 向下转型
+
+ClassCatException类型转换的异常
+
++ 做向下转型前必须先做向上转型
+
+```java
+Animal a = new Cat();
+Cat c = (cat) a;
+c.a();
+```
+
+
+
+instanceof 
+
+对象 instanceof 数据类型
+
+判断前面的对象是否是后面的数据类型，如果是返回ture，不是返回false
+
+```java
+Animal animal = a (-1);
+if (animal instanceof Cat) {
+    Cat c = (Cat) animal;
+    System.out.println(c);
+    c.run();
+} else {
+    Dog d = (Dog) animal;
+    System.out.print(d);
+    d.run();
+}
+```
+
+
+
 #### 7.8.2.4 抽象方法
 
 + 只有方法声明没有方法体
@@ -1321,21 +1356,13 @@ implements
 
 子类继承了抽象类，实现逻辑
 
+## 8 接口类型
 
++ 接口注重的是方法
 
+## 8.1接口定义
 
-
-## 7.8 面向对象语言的特性
-
-
-
-8 接口类型
-
-接口注重的是方法
-
-8.1接口定义
-
-接口中的方法，默认是抽象方法，默认使用public abstract修饰
++ 接口中的方法，默认是抽象方法，默认使用public abstract修饰
 
 ```java
 public interface 接口名 {
@@ -1344,13 +1371,15 @@ public interface 接口名 {
 }
 ```
 
-接口中都是抽象方法，通过类进行具体实现
++ 接口中都是抽象方法，通过类进行具体实现
 
-类（实现类）实现接口（父接口）
+## 8.2 接口的实现
 
-一个类乐园实现多各接口
++ 类（实现类）实现接口（父接口）
 
-接口和接口间是多继承的关系
++ 一个类可以实现多个接口
+
++ 接口和接口间是多继承的关系
 
 ```java
 pbulic class 类名 implements 接口名 () {
@@ -1363,9 +1392,67 @@ pbulic class 类名 implements 接口名 () {
 |      | 类       | 接口       |
 | ---- | -------- | ---------- |
 | 类   | 单根继承 | 类实现接口 |
-| 接口 |          | 多继承     |
+| 接口 | 多实现   | 多继承     |
 
-static 
+## 8.3 方法体
+
++ JDK1、8 以上可以在接口中定义方法体，但是需要使用default修饰
+
+```java
+public interface A {
+    public static void a(){
+
+    };
+    public default void a(int a){
+
+    }
+}
+```
+
+## 8.4 接口和抽象类
+
+### 8.4.1 相同点
+
++ 都有常量和抽象方法
++ jdk1.8后都可以定义普通方法
++ 都可以使用匿名内部类完成功能
+
+### 8.4.2 不同点
+
++ jdk1.8 前不可以在接口中定义普通方法
++ 类和类单根继承
++ 类和接口 多实现
++ 类中有属性和方法、构造方法、set/get方法、toString、代码块，接口中没有
++ 接口可以通过lambda表达式实现
+
+```java
+package git.cncf.online.day13;
+
+public interface shape1 {
+    void a();
+}
+
+
+
+
+package git.cncf.online.day13;
+
+public class test {
+    public static void mian(String[] args) {
+        new shape1() {
+
+            @Override
+            public void a() {
+                
+            }
+        };
+    }
+}
+```
+
+
+
+# 9 static 
 
 + 加载类-->创建对象-->分配内存-->使用
 
@@ -1384,4 +1471,87 @@ static修饰的内容需要通过类进行调用，通过类调用的方法称�
 ![image-20210321165613836](002 Java语言基础.assets/image-20210321165613836.png)
 
 
+
+## 9.1 static 可以修饰的内容
+
+static可以修饰全局变量
+
+static不可以修饰局部变量
+
+构造方法
+
+getset方法
+
+抽象方法
+
+自己定义的方法
+
+static修饰的方法不可以被重写
+
+
+
+类只能调用static的方法
+
+对象可以调用static方法和普通方法
+
+static {} static可以修饰代码块   静态代码块，随着类加载而执行，只会执行一次
+
+## 9.2 静态代码块
+
++ 先加载父类代码块---->子类静态代码块------>父类的构造代码块------>父类的构造方法------->子类的构造代码块-------->子类的构造方法 
+
+```java
+ststic {
+    
+}
+```
+
+
+
+## 9.3 构造代码块
+
++ 在构造方法前执行的代码块叫构造代码块
+
+```
+{}
+//随构造方法的执行而执行
+```
+
+## 9.4 final
+
+final可以修饰类，<font color="red">但final修饰的类不能被继承</font>
+
+final不可以修饰抽象类
+
+final可以修饰局部变量，也可以修饰get/set方法，但不这么用
+
+final不可以修饰抽象方法
+
+final可以修饰普通方法，但是<font color="red">final修饰的方法不能被重写</font>
+
++ final可以修饰全局变量，但必须赋值
+
+```java
+final int a = 10;
+```
+
++ final修饰的变量是只读的普通变量
+
++ 在使用final修饰的变量前对final修饰的变量赋值就不会影响使用
++ 构造代码块中进行赋值
+
+## 9.5 static final 修饰
+
++ 用大写字母表示
+
++ 优先加载的一个不能变的值
++ static final 修饰基本数据类型 当前这个变量的值不能变
++ static final 修饰引用数据类型 地址不能变（值不能变），但是可以对其中值的内容重新赋值
+
+```java 
+static final int A = 10;
+//static修饰的基本数据类型代表当前修饰的变量值不能变
+static final int[] = A{};
+A[1 = 10;
+```
 
