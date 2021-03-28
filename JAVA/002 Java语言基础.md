@@ -1452,7 +1452,7 @@ public class test {
 
 
 
-# 9 static 
+# 9 static 和final
 
 + 加载类-->创建对象-->分配内存-->使用
 
@@ -1553,5 +1553,59 @@ static final int A = 10;
 //static修饰的基本数据类型代表当前修饰的变量值不能变
 static final int[] = A{};
 A[1 = 10;
+```
+
+# 10 单例
+
++ 一个类只有一个对象
+  + 优点：节省内存空间
+
+## 10.1 单例的实现
+
+a. 不能随便的调用构造方法进行对象创建
+
+限制对象的创建，不要在测试类中随便创建，出了类不能使用
+
+b. static修饰的方法可以通过类进行调用，提供对象
+
+c. 不能随便创建，一个类只能有一个，不能在static方法中创建
+
+### 10.1.1 饿汉模式
+
++ 无论是否调用方法
+
+```java
+package git.cncf.online.day14;
+
+public class cat2 {
+    private String name;
+    private byte age;
+    private String type;
+    private static cat2 cat = new cat2();
+
+    public static cat2 getInstance() {
+        return cat;
+    }
+}
+```
+
+### 10.1.2 懒汉模式
+
+```java
+package git.cncf.online.day14;
+
+public class cat2 {
+    private String name;
+    private byte age;
+    private String type;
+    private static cat2 cat;
+    
+public static cat2 getInstance() {
+        if (cat == null) {
+            cat = new cat2();
+        }
+        return cat;
+    }
+}
 ```
 
