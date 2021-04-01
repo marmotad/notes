@@ -1609,3 +1609,316 @@ public static cat2 getInstance() {
 }
 ```
 
+# 11 String
+
+## 11.1 构造方法赋值
+
+```java
+public class teststring {
+    public static void main(String[] args) {
+        //字符串创建对象的方式  1 构造方法赋值-----------存在于堆中
+//        空的字符串
+        String str = new String();
+        System.out.println(str);
+//        字符串的构造方法
+        String str1 = new String("fdjfkd");
+        System.out.println(str1);
+    }
+}    
+```
+
+###### 运行结果
+
+```java
+
+fdjfkd
+```
+
+## 11.2 类型转换
+
+### 11.2.1 字符数组转成字符串
+
+```java
+        char[] chs = {'2','f','c'};
+//        字符数组转成字符串
+        String str2 = new String(chs);
+        System.out.println(str2);
+        System.out.println(new String(chs,1,2));
+```
+
+###### 运行结果
+
+```java
+2fc
+fc
+```
+
+### 11.2.2 byte数组转字符串
+
+```java
+//  byte数组转字符串
+        byte[] bytes = new byte[10];
+        for (int i = 0; i < bytes.length; i++) {
+            bytes[i]=(byte)(i+97);
+        }
+        System.out.println(new String(bytes));
+//        调用的方法加了删除线 方法不推荐使用
+        System.out.println(new String(bytes,2,5));
+```
+
+###### 运行结果
+
+```java
+abcdefghij
+cdefg
+```
+
+### 11.2.3 获取指定索引位置上的数据
+
+```
+        String s = "++++http:/  /abcdefa.txt+++";
+//        调用方法 查看方法功能
+//        可以获取指定索引位置上的数据
+        char a = s.charAt(0);
+        System.out.println(a);
+```
+
+###### 运行结果
+
+```powershell
++
+```
+
+### 11.2.4 字符串长度
+
+```java
+        String s = "++++http:/  /abcdefa.txt+++";
+//        调用方法 查看方法功能
+//        可以获取指定索引位置上的数据
+        char a = s.charAt(0);
+//        获取字符串长度
+        System.out.println(s.charAt(s.length()-1));
+```
+
+###### 运行结果
+
+```powershell
++
++
+```
+
+### 11.2.5 获取数字对应的字符索引
+
+#### 11.2.5.1 从左往右查找
+
+```java
+//        找到了 就返回索引位置  没找到 返回-1
+        System.out.println(s.indexOf(98));
+        System.out.println(s.indexOf(98,2));
+        System.out.println(s.indexOf("ab"));
+        System.out.println(s.indexOf("b",2));
+```
+
+###### 运行结果
+
+```powershell
+14
+14
+13
+14
+```
+
+11.2.5.1 从右往左查找
+
+```java
+//   从后向前找
+        System.out.println(s.lastIndexOf("a"));
+        System.out.println(s.lastIndexOf("a",5));
+        System.out.println(s.lastIndexOf(98));
+        System.out.println(s.lastIndexOf(98,5));
+```
+
+###### 运行结果
+
+```powershell
+19
+-1
+14
+-1
+```
+
+#### 11.2.5.2 从指定开始位置取到结尾
+
+```java
+        System.out.println(s.substring(4));
+```
+
+###### 运行结果
+
+```powershell
+http:/  /abcdefa.txt+++
+```
+
+#### 11.2.5.3 从指定开始位置取到指定位置
+
+```java
+        System.out.println(s.substring(4,6));
+```
+
+###### 运行结果
+
+```
+ht
+```
+
+#### 11.2.5.4 获取后缀
+
+```java
+        System.out.println(s.substring(s.indexOf(".")+1));
+```
+
+###### 运行结果
+
+```powershell
+txt+++
+```
+
+#### 11.2.5.5 判断文件后缀
+
+```java
+        System.out.println(s.endsWith("txt"));
+```
+
+###### 运行结果
+
+```powershell
+false
+```
+
+#### 11.2.5.6 判断文件前缀
+
+```java
+        System.out.println(s.startsWith("http://"));
+```
+
+###### 运行结果
+
+```
+false
+```
+
+#### 11.2.5.7 大小写转换
+
+```java
+        System.out.println(s.toLowerCase());
+        System.out.println(s.toUpperCase());
+```
+
+###### 运行结果
+
+```
+++++http:/  /abcdefa.txt+++
+++++HTTP:/  /ABCDEFA.TXT+++
+```
+
+#### 11.2.5.8 判断字符串是否为空
+
+```java
+        System.out.println(s.isEmpty());
+```
+
+###### 运行结果
+
+```java
+false
+```
+
+#### 11.2.5.9 去掉字符串前后空白
+
+```java
+        System.out.println(s.trim());
+```
+
+###### 运行结果
+
+```
+++++http:/  /abcdefa.txt+++
+```
+
+#### 11.2.5.10 字符串转byte数组
+
+```java
+        System.out.println(s.getBytes());
+```
+
+###### 运行结果
+
+```
+[B@1b6d3586
+```
+
+#### 11.2.5.11 字符串转char数组
+
+```java
+        System.out.println(s.toCharArray());
+```
+
+###### 运行结果
+
+```
+++++http:/  /abcdefa.txt+++    
+```
+
+#### 11.2.5.12 替换指定字符
+
+```
+        System.out.println(s.replace('a','X'));
+```
+
+###### 运行结果
+
+```
+++++http:/  /XbcdefX.txt+++  
+```
+
+#### 11.2.5.13 指定规则拆分字符串
+
+```java
+String[] strs = s.split("a",2);
+for (String s1:strs
+) {
+    System.out.println(s1);
+}
+```
+
+###### 运行结果
+
+```
+++++http:/  /
+bcdefa.txt+++  
+```
+
+#### 11.2.5.14 替换所有指定字符串
+
+```java
+        System.out.println(s.replaceAll("a","QQ"));
+```
+
+###### 运行结果
+
+```
+++++http:/  /QQbcdefQQ.txt+++  java
+```
+
+#### 11.2.5.14 替换结尾的指定字符串
+
+```java
+System.out.println(s.replaceFirst("a","QQ"));
+```
+
+###### 运行结果
+
+```
+++++http:/  /QQbcdefa.txt+++  
+```
+
