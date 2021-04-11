@@ -1673,7 +1673,7 @@ abcdefghij
 cdefg
 ```
 
-### 11.2.3 获取指定索引位置上的数据
+## 11.3 获取指定索引位置上的数据
 
 ```
         String s = "++++http:/  /abcdefa.txt+++";
@@ -1689,7 +1689,7 @@ cdefg
 +
 ```
 
-### 11.2.4 字符串长度
+## 11.4 字符串长度
 
 ```java
         String s = "++++http:/  /abcdefa.txt+++";
@@ -1707,9 +1707,9 @@ cdefg
 +
 ```
 
-### 11.2.5 获取数字对应的字符索引
+## 11.5 获取数字对应的字符索引
 
-#### 11.2.5.1 从左往右查找
+### 11.5.1 从左往右查找
 
 ```java
 //        找到了 就返回索引位置  没找到 返回-1
@@ -1728,7 +1728,7 @@ cdefg
 14
 ```
 
-11.2.5.1 从右往左查找
+### 11.5.2 从右往左查找
 
 ```java
 //   从后向前找
@@ -1747,7 +1747,7 @@ cdefg
 -1
 ```
 
-#### 11.2.5.2 从指定开始位置取到结尾
+### 11.5.3 从指定开始位置取到结尾
 
 ```java
         System.out.println(s.substring(4));
@@ -1759,7 +1759,7 @@ cdefg
 http:/  /abcdefa.txt+++
 ```
 
-#### 11.2.5.3 从指定开始位置取到指定位置
+### 11.5.4 从指定开始位置取到指定位置
 
 ```java
         System.out.println(s.substring(4,6));
@@ -1771,7 +1771,7 @@ http:/  /abcdefa.txt+++
 ht
 ```
 
-#### 11.2.5.4 获取后缀
+### 11.5.5 获取后缀
 
 ```java
         System.out.println(s.substring(s.indexOf(".")+1));
@@ -1783,7 +1783,7 @@ ht
 txt+++
 ```
 
-#### 11.2.5.5 判断文件后缀
+### 11.5.6 判断文件后缀
 
 ```java
         System.out.println(s.endsWith("txt"));
@@ -1795,7 +1795,7 @@ txt+++
 false
 ```
 
-#### 11.2.5.6 判断文件前缀
+### 11.5.7 判断文件前缀
 
 ```java
         System.out.println(s.startsWith("http://"));
@@ -1807,7 +1807,7 @@ false
 false
 ```
 
-#### 11.2.5.7 大小写转换
+### 11.5.7 大小写转换
 
 ```java
         System.out.println(s.toLowerCase());
@@ -1821,7 +1821,7 @@ false
 ++++HTTP:/  /ABCDEFA.TXT+++
 ```
 
-#### 11.2.5.8 判断字符串是否为空
+### 11.5.8 判断字符串是否为空
 
 ```java
         System.out.println(s.isEmpty());
@@ -1833,7 +1833,7 @@ false
 false
 ```
 
-#### 11.2.5.9 去掉字符串前后空白
+### 11.5.9 去掉字符串前后空白
 
 ```java
         System.out.println(s.trim());
@@ -1845,7 +1845,7 @@ false
 ++++http:/  /abcdefa.txt+++
 ```
 
-#### 11.2.5.10 字符串转byte数组
+### 11.5.10 字符串转byte数组
 
 ```java
         System.out.println(s.getBytes());
@@ -1857,7 +1857,7 @@ false
 [B@1b6d3586
 ```
 
-#### 11.2.5.11 字符串转char数组
+### 11.5.11 字符串转char数组
 
 ```java
         System.out.println(s.toCharArray());
@@ -1869,7 +1869,7 @@ false
 ++++http:/  /abcdefa.txt+++    
 ```
 
-#### 11.2.5.12 替换指定字符
+### 11.5.12 替换指定字符
 
 ```
         System.out.println(s.replace('a','X'));
@@ -1881,7 +1881,7 @@ false
 ++++http:/  /XbcdefX.txt+++  
 ```
 
-#### 11.2.5.13 指定规则拆分字符串
+### 11.5.13 指定规则拆分字符串
 
 ```java
 String[] strs = s.split("a",2);
@@ -1898,7 +1898,7 @@ for (String s1:strs
 bcdefa.txt+++  
 ```
 
-#### 11.2.5.14 替换所有指定字符串
+### 11.5.14 替换所有指定字符串
 
 ```java
         System.out.println(s.replaceAll("a","QQ"));
@@ -1910,7 +1910,7 @@ bcdefa.txt+++
 ++++http:/  /QQbcdefQQ.txt+++  java
 ```
 
-#### 11.2.5.14 替换结尾的指定字符串
+### 11.5.14 替换结尾的指定字符串
 
 ```java
 System.out.println(s.replaceFirst("a","QQ"));
@@ -1922,3 +1922,483 @@ System.out.println(s.replaceFirst("a","QQ"));
 ++++http:/  /QQbcdefa.txt+++  
 ```
 
+### 11.5.15 字符串比较
+
+```java
+//Sting 类重写了equals方法，进行值比较
+        System.out.println((s.equals(s2)));
+        //不区分大小写比较
+        System.out.println((s.equalsIgnoreCase(s2)));
+```
+
+###### 运行结果
+
+```
+false
+true
+```
+
+## 11.6 StringBuilder修改字符串
+
+### 11.6.1 打印字符串容量
+
+```java
+        System.out.println(s);
+
+        StringBuilder strs1 = new StringBuilder("123");
+		System.out.println(strs1.capacity());
+```
+
+###### 运行结果
+
+```
+19
+```
+
+### 11.6.2 在字符串结尾插入
+
+```
+        System.out.println(strs1.append("a"));
+```
+
+###### 运行结果
+
+```
+123a
+```
+
+### 11.6.3 在字符串开始位置插入
+
+```java
+        System.out.println(strs1.insert(0, "#"));
+```
+
+###### 运行结果
+
+```
+#123a
+```
+
+### 11.6.4 删除字符串
+
+```java
+        System.out.println(strs1.delete(0,1));
+```
+
+###### 运行结果
+
+```
+123a
+```
+
+### 11.6.5 修改字符串
+
+```
+        System.out.println(strs1.replace(0,3,"XC"));
+```
+
+###### 运行结果
+
+```
+XCa
+```
+
+### 11.6.6 反转
+
+```java
+        System.out.println(strs1.reverse());
+```
+
+###### 运行结果
+
+```
+aCX
+```
+
+# 12 引用数据类型
+
+| 基本数据类型 | 引用数据类型 |
+| ------------ | ------------ |
+| byte         | Byte         |
+| short        | Short        |
+| int          | Integer      |
+| long         | Long         |
+| float        | Float        |
+| double       | Double       |
+| char         | Character    |
+| boolean      | Boolean      |
+
+## 12.1  Integer
+
+```java
+package git.cncf.online.day14;
+
+public class testtype {
+    public static void main(String[] args) {
+        //基本数据类型转引用数据类型 -----> 直接转
+        int i = 10;
+        //new创建对象存放在堆区中
+        Integer i1 = new Integer(10);
+        System.out.println(i1);
+        //引用数据类型转基础数据类型 -----> 直接转
+        //存放在运行时常量池
+        Integer i2 = 10;
+        //判断是否在常量池的相同位置
+        Integer i4 = 10;
+        System.out.println(i2 == i4);
+        //超出一个字节后（8位），常量池的地址是不同的
+        Integer i5 =128;
+        Integer i6 =128;
+        System.out.println(i5 == i6);
+        int i3 = i2;
+        System.out.println(i3);
+        //比较基本数据类型和引用数据类型的地址
+        System.out.println(i1 == i2);
+        //比较值是否相同
+        System.out.println(i1.equals(i2));
+
+    }
+}
+```
+
+###### 运行结果
+
+```
+10
+true
+false
+10
+false
+true
+```
+
+# 13 Math
+
+```java
+package git.cncf.online.day14;
+
+import java.util.Random;
+
+public class testtype {
+    public static void main(String[] args) {
+        //字符串转换为数字
+        System.out.println(Math.PI);
+        //向下取整
+        System.out.println(Math.floor(8.99));
+        //向上取整
+        System.out.println(Math.ceil(8.01));
+        //四舍五入
+        System.out.println(Math.round(8.5));
+        System.out.println(Math.round(8.4));
+        //平方根
+        System.out.println(Math.sqrt(9));
+        System.out.println(Math.sqrt(5));
+        //平方
+        System.out.println(Math.pow(2,2));
+        //随机数
+        System.out.println(Math.random() * 10);
+        System.out.println((int)(Math.random() * 10));
+    }
+}    
+```
+
+###### 运行结果
+
+```
+3.141592653589793
+8.0
+9.0
+9
+8
+3.0
+2.23606797749979
+4.0
+7.249728024020541
+9
+24
+```
+
+# 14 Scanner
+
+## 14.1 以回车为标识
+
+```java
+        //Scanner 控制台输入
+        Scanner input = new Scanner(System.in);
+        //以回车为标识，遇到回车表示结束
+        System.out.println(input.nextLine())
+```
+
+###### 运行结果
+
+```
+ab cd
+ab cd
+```
+
+## 14.2 返回int数据类型
+
+```java
+        //Scanner 控制台输入
+        Scanner input = new Scanner(System.in);
+        //返回int数据类型
+        System.out.println(input.nextInt());
+```
+
+###### 运行结果
+
+```
+11
+11
+```
+
+## 14.3 以空白标识符分割
+
+```java
+        //Scanner 控制台输入
+        Scanner input = new Scanner(System.in);
+        //控制台字符串接收，遇到空白标识符结束
+        System.out.println(input.next());
+```
+
+###### 运行结果
+
+```
+ab a
+ab
+```
+
+# 15 文件操作
+
+## 15.1 File
+
+### 15.1.1 获取文件信息
+
+```java
+package git.cncf.online.day16;
+
+import java.io.File;
+
+public class touchfile {
+    public static void main(String[] args) {
+        //
+        File file = new File("D:\\notes\\test.txt");
+        //查看文件大小，单位为字节
+        System.out.println(file.length());
+        //获取文件名
+        System.out.println(file.getName());
+        //获取文件路径（获取到的是路径和文件名）
+        System.out.println(file.getPath());
+        //获取文件所在的目录
+        System.out.println(file.getParent());
+        //获取文件所在目录的字符串信息
+        System.out.println(file.getParentFile());
+        //获取文件绝对路径(使用字符串方法)
+        System.out.println(file.getAbsolutePath());
+        //获取\的位置
+        System.out.println(file.getAbsolutePath().lastIndexOf("\\"));
+        //获取文件绝对路径（使用file方法）
+        System.out.println(file.getAbsoluteFile())
+     }
+}
+```
+
+###### 运行结果
+
+```
+0
+test.txt
+D:\notes\test.txt
+D:\notes
+D:\notes
+D:\notes\test.txt
+8
+D:\notes\test.txt
+```
+
+### 15.1.2 创建删除文件
+
++ delete ： 删除文件。一旦调用,程序立即执行删除操作
++ deleteOnExit ：它被调用时,相当于对deleteOnExit做了一个生声明, 不会马上执行删除操作, 而是程序运行结束, JVM终止时才真正调用删除操作。即该方法是将删除的命令缓存了一下，到服务停止的时候再进行操作！
+  
+
+```java
+
+package git.cncf.online.day16;
+
+import java.io.File;
+import java.io.IOException;
+
+public class touchfile {
+    public static void main(String[] args) {
+
+        File file = new File("D:\\notes\\test.txt");
+
+        //先判断是否是目录
+        System.out.println(file.isDirectory());
+
+        //获取目录下文件列表
+        //如果输入的是一个目录遍历该目录下的文件
+        //判断输入是否是一个目录
+
+        if (file.isDirectory()) {
+            //file.list 获取文件名称
+            String[] strs = file.getParentFile().list();
+            for (String s:strs) {
+                System.out.println(s);
+            }
+            //如果输入的是一个文件遍历该文件所在目录下的文件
+            //判断输入是否是一个文件
+        } else if (file.isFile()) {
+            //文件数组
+            //listFiles 获取文件绝对路径
+            File[] strs = file.getParentFile().listFiles();
+            for (File s:strs) {
+                System.out.println(s);
+            }
+        }
+        //判断文件是否存在
+        System.out.println(file.exists());
+        //创建文件
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        //删除文件
+        file.delete();
+        file.deleteOnExit();
+    }
+}
+```
+
+###### 运行结果
+
+```
+false
+D:\notes\.git
+D:\notes\Golang
+D:\notes\JAVA
+D:\notes\kubernetes
+D:\notes\Ruby
+D:\notes\test.txt
+D:\notes\运维笔记
+true
+```
+
+### 15.1.3 判断文件
+
+```java
+package git.cncf.online.day16;
+
+import java.io.File;
+import java.io.IOException;
+
+public class touchfile {
+    public static void main(String[] args) {
+
+        File file = new File("D:\\notes\\test.txt");
+        //判断文件是否存在
+        System.out.println(file.exists());
+        //创建文件
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        //判断是否是绝对路径
+        System.out.println(file.isAbsolute());
+        //判断是否是隐藏文件
+        System.out.println(file.isHidden());
+        //查看文件是否可用写入
+        System.out.println(file.canWrite());
+        //设置是否可写
+        file.setWritable(false);
+        System.out.println(file.canWrite());
+        file.setWritable(true);
+        System.out.println(file.canWrite());
+    }
+}
+```
+
+###### 运行结果
+
+```
+true
+true
+false
+true
+false
+true
+```
+
+### 15.1.4 创建目录
+
+```java
+package git.cncf.online.day16;
+
+import java.io.File;
+import java.io.IOException;
+
+public class touchfile {
+    public static void main(String[] args) {
+
+        File file = new File("D:\\notes\\test.txt");
+        //创建单个目录
+        file.getAbsoluteFile().mkdir();
+        //创建多层目录
+        file.getAbsoluteFile().mkdirs();
+    }
+}
+```
+
+![image-20210411180245906](002 Java语言基础.assets/image-20210411180245906.png)
+
+## 15.2 读取文件
+
+```java
+package git.cncf.online.day16;
+
+import java.io.*;
+
+public class RWfile {
+    public static void main(String[] args) {
+        File file = new File("D:\\notes\\JAVA\\1.txt");
+        InputStream catfile = null;
+        try {
+            //1 创建通道(输入通道)
+            catfile = new FileInputStream(file);
+            //2 通过通道进行数据的流向 可以通过通道传输数据
+            //3 创建合适的数据类型，并存储通道中数据
+            byte[] bytes = new byte[(int)file.length()];
+            catfile.read(bytes);
+            //4 打印数组中内容
+            System.out.println(new String(bytes));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            //5 关闭通道
+            try {
+                catfile.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+}
+```
+
+###### 运行结果
+
+```
+1111111
+```
