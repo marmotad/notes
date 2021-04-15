@@ -2362,6 +2362,8 @@ public class touchfile {
 
 ## 15.2 读取文件
 
+### 15.2.1 读取已知大小的文件
+
 ```java
 package git.cncf.online.day16;
 
@@ -2402,3 +2404,89 @@ public class RWfile {
 ```
 1111111
 ```
+
+### 15.2.2 读取未知大小的文件
+
+```
+package git.cncf.online.day16;
+
+import java.io.*;
+
+public class RWfile {
+    public static void main(String[] args) {
+        File file = new File("D:\\notes\\JAVA\\JAVA算法.md");
+        InputStream catfile = null;
+
+        try {
+            //1 创建通道(输入通道)
+            catfile = new FileInputStream(file);
+            //2 通过通道进行数据的流向 可以通过通道传输数据
+            //3 创建合适的数据类型，并存储通道中数据
+            byte[] bytes = new byte[1024];
+            //创建变量用于存储上次读取到的位置
+            int a = catfile.read(bytes);
+            //如果最后存储位置有数据执行以下while循环
+            while (a != -1){
+                //打印bytes数组中，从开始到结束的数据（0：数组开始位置，a：数组结束吧位置）
+                System.out.println(new String(bytes,0,a));
+                //从通道中读取新的数据
+                a = catfile.read(bytes);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### 15.2.3 文件写入和复制
+
+```java
+package git.cncf.online.day16;
+
+import java.io.*;
+
+public class WriteFile {
+    public static void main(String[] args) {
+        //写入文件
+        File wrirt = new File("D:\\test.txt");
+        OutputStream out = null;
+        try {
+            //会覆盖原文件内容，默认append是false，不会在文件中追加内容
+            out = new FileOutputStream(wrirt);
+            out.write("aaa".getBytes());
+            //追加文件内容
+            out = new FileOutputStream(wrirt,true);
+            out.write("aaa".getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //文件复制
+        //指定复制后的文件
+        File copy = new File("D:\\copytest.txt");
+        //定义变量input，用于从指定文件中读取数据
+        InputStream input = null;
+        try {
+        //指定文件中读取数据
+        input = new FileInputStream(wrirt);
+        //指定每次读取文件的长度
+        byte[] bytes = new byte[1024];
+        //定义变量a记录读取文件次数
+        int a = input.read(bytes);
+        //将读取到的文件写入copy变量指定的文件
+        out = new FileOutputStream(copy,true);
+        //判断文件数据是否读取完
+        while (a != -1) {
+            //写入从数组开始位置到结束位置大小的数据
+            out.write(bytes,0,a);
+            a = input.read(bytes);
+        }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
