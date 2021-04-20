@@ -2485,8 +2485,198 @@ public class WriteFile {
         }
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                input.close();
+                out.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
 ```
 
+## 15.3 字节流
+
+#### 15.3.1 使用字节流方法读取文件
+
+```java
+package git.cncf.online.day17;
+
+import java.io.*;
+
+public class byteread {
+    public static void main(String[] args) {
+        File file = new File("D:\\test.txt");
+        Reader reader = null;
+        try {
+            reader = new FileReader(file);
+            char[] chars = new char[(int)file.length()];
+            reader.read(chars);
+            System.out.println(new String(chars));
+            //重点：catch可以写多个，但是必须是从上到下，从小到大捕捉
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        } finally {
+            try {
+                reader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
+```
+
+### 15.3.1 使用字节流方法写文件
+
+```java
+package git.cncf.online.day17;
+
+import java.io.*;
+
+public class byteWrite {
+        public static void main(String[] args) {
+            File file = new File("D:\\test.txt");
+            Writer writer = null;
+            try {
+                writer = new FileWriter(file, true);
+                char[] chars = new char[(int) file.length()];
+                writer.write("fsdfsd但是");
+                //重点：catch可以写多个，但是必须是从上到下，从小到大捕捉
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    writer.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+}
+```
+
+## 15.4 缓冲流
+
+### 15.4.1 缓冲流读
+
+```Java
+package git.cncf.online.day17;
+
+import java.io.*;
+
+public class BufferReadFile {
+    public static void main(String[] args) throws IOException {
+        //缓存流
+        //字节流读缓冲流
+        File file = new File("D:\\test.txt");
+        BufferedInputStream buffer = new BufferedInputStream(new FileInputStream(file));
+        byte[] bytes = new byte[(int) file.length()];
+        buffer.read(bytes);
+        System.out.println(new String(bytes));
+        buffer.close();
+        System.out.println("----------------------");
+        //字符流读缓冲流
+        File files = new File("D:\\test.txt");
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(files));
+        char[] chars = new char[(int) file.length()];
+        bufferedReader.read(chars);
+        System.out.println(new String(chars));
+        bufferedReader.close();
+    }
+}
+```
+
+###### 运行结果
+
+```
+fsdfsd但是fsdfsd但
+是的hjvfdjvdf
+----------------------
+fsdfsd但是fsdfsd但
+是的hjvfdjvdf          
+```
+
+### 15.4.2 缓冲流写
+
+```Java
+package git.cncf.online.day17;
+
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+
+public class BufferWritFile {
+    public static void main(String[] args) throws IOException {
+        //字节缓冲流
+        File file = new File("D:\\test.txt");
+        BufferedOutputStream oupt = new BufferedOutputStream(new FileOutputStream(file, true));
+        oupt.write("hjvfdjvdf".getBytes(StandardCharsets.UTF_8));
+        oupt.close();
+        //字符缓冲流
+        BufferedWriter bufferWritFile = new BufferedWriter(new FileWriter(file,true));
+
+    }
+}
+```
+
+### 15.4.3 缓冲流按行写
+
+```Java
+package git.cncf.online.day17;
+
+import java.io.*;
+
+public class BufferLine {
+    public static void main(String[] args) throws IOException {
+        //字符流读缓冲流(按行读)
+        File readFile = new File("D:\\test.txt");
+        File writeFile = new File("D:\\test1.txt");
+        BufferedReader bufferedreader = new BufferedReader(new FileReader(readFile));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(writeFile));
+        String s = bufferedreader.readLine();
+        while (s != null) {
+            bufferedWriter.write(s);
+            bufferedWriter.newLine();
+            s = bufferedreader.readLine();
+        }
+        bufferedreader.close();
+        bufferedWriter.close();
+    }
+}
+```
+
+### 15.4.4 字节流转换为字符流
+
+```
+package git.cncf.online.day17;
+
+import java.io.*;
+
+public class byteConversion {
+    public static void main(String[] args) throws IOException {
+        File file = new File("D:\\test.txt");
+        InputStream inputStream = new FileInputStream(file);
+        //字节流转换为字符流
+        InputStreamReader input = new InputStreamReader(inputStream);
+
+        BufferedReader bufferedReader = new BufferedReader(input);
+
+        String s = bufferedReader.readLine();
+
+        while (s != null) {
+            System.out.println(s);
+            s = bufferedReader.readLine();
+
+        }
+        bufferedReader.close();
+    }
+}
+```
