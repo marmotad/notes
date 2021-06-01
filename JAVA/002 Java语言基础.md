@@ -885,7 +885,7 @@ public class age {
 }
 ```
 
-### 7.6.2引用特征类的方法
+### 7.6.2 引用特征类的方法
 
 ```java
 public class test {
@@ -1001,16 +1001,16 @@ public 类名() {
 ##### 7.7.1.2.1 在类中定义方法
 
 ```java
-    public Student () {
+//定义无参的方法
+public Student () {
 
     }
-//定义无参的方法
-    public Student (String name, byte score, short num) {
+//定义有参的方法
+public Student (String name, byte score, short num) {
         this.name = name;
         this.score = score;
         this.num = num;
     }
-//定义有参的方法
 ```
 
 ##### 7.7.1.2.2 方法重载
@@ -2220,7 +2220,6 @@ D:\notes\test.txt
 
 + delete ： 删除文件。一旦调用,程序立即执行删除操作
 + deleteOnExit ：它被调用时,相当于对deleteOnExit做了一个生声明, 不会马上执行删除操作, 而是程序运行结束, JVM终止时才真正调用删除操作。即该方法是将删除的命令缓存了一下，到服务停止的时候再进行操作！
-  
 
 ```java
 
@@ -2678,5 +2677,99 @@ public class byteConversion {
         }
         bufferedReader.close();
     }
+}
+```
+
+## 15.5 接口
+
+### 15.5.1 普通接口 
+
+常量、抽象方法、类实现接口、重写方法
+
+### 15.5.2 标记接口
+
+实现了接口就具有了标记的功能
+
+```java
+package git.cncf.online.day17;
+
+import java.io.Serializable;
+
+public class cat implements Serializable {
+    private static final long serialVersionUID = 4639690024075146279L;
+    private int age;
+    private String name;
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "cat{" +
+                "age=" + age +
+                ", name='" + name + '\'' +
+                '}';
+    }
+}
+```
+
+```java
+package git.cncf.online.day17;
+
+import java.io.*;
+
+public class test {
+
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+
+    File file = new File("D:\\test.txt");
+
+    ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(file));
+    cat cat = new cat();
+    cat.setAge(3);
+    cat.setName("tomcat");
+    objectOutputStream.writeObject(cat);
+    objectOutputStream.close();
+
+    ObjectInputStream objectInputStream= new ObjectInputStream(new FileInputStream(file));
+    //标记接口
+    Object object = objectInputStream.readObject();
+    if (object instanceof cat) {
+        cat cat1 = (cat) object;
+        System.out.println(cat1);
+    }
+    }
+}
+```
+
+### 15.5.3 注解接口  @ 
+
+```Java
+package git.cncf.online.day17;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+//注解放的位置，FILKED（属性的位置）
+@Target(ElementType.FIELD)
+//什么时候生效SOURCE（编译时生效）
+@Retention(RetentionPolicy.SOURCE)
+public @interface interfaceDemo {
+
 }
 ```
