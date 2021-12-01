@@ -914,7 +914,7 @@ kubectl apply -f admin.yaml -n kube-system
 kubectl edit svc kubernetes-dashboard -n kubernetes-dashboard
 ```
 
-![image-20211025125947184](C:\Users\coder\AppData\Roaming\Typora\typora-user-images\image-20211025125947184.png)
+![image-20211025125947184](kubeadm安装k8s.assets/image-20211025125947184-16383308561871.png)
 
 + 查看端口号：
 
@@ -922,7 +922,7 @@ kubectl edit svc kubernetes-dashboard -n kubernetes-dashboard
 kubectl get svc kubernetes-dashboard -n kubernetes-dashboard
 ```
 
-![image-20211025125955102](C:\Users\coder\AppData\Roaming\Typora\typora-user-images\image-20211025125955102.png)
+![image-20211025125955102](kubeadm安装k8s.assets/image-20211025125955102.png)
 
 + 查看token值
 
