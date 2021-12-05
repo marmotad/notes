@@ -579,7 +579,7 @@ Docker官方使用一张表格来展示了ENTRYPOINT 和CMD不同组合的执行
 
 （下方表格来自docker官网）
 
-![img](https://mmbiz.qlogo.cn/mmbiz_png/t47qlZmphw475pZYR8DSRPz1GLb6F9SRpZjNRK7752wL3EYMH6ibR2zExdIicN9NDcpicXSElTrHwICuCNosHYWvQ/0?wx_fmt=png)
+![img](Docker基础.assets/0.jpeg)
 
  
 
@@ -806,7 +806,7 @@ CMD "./opt/main"
 
 + **可以把一个可执行文件扔进来直接执行**
 
-[![img](https://raw.githubusercontent.com/52cto/PictureGo/master/img/20191121131913.png)](https://raw.githubusercontent.com/52cto/PictureGo/master/img/20191121131913.png)
+[![img](Docker基础.assets/20191121131913.png)](https://raw.githubusercontent.com/52cto/PictureGo/master/img/20191121131913.png)
 
 ### 4.3.1scratch不可用被pull
 
@@ -817,7 +817,7 @@ CMD "./opt/main"
 Using default tag: latest
 Error response from daemon: 'scratch' is a reserved name
 ```
-![img](https://raw.githubusercontent.com/52cto/PictureGo/master/img/20191121131832.png)
+![img](Docker基础.assets/20191121131832-16386982278304.png)
 
 ### 4.3.2 如何制作大小为0 的镜像
 
@@ -963,7 +963,7 @@ REPOSITORY          TAG                 IMAGE ID            CREATED             
 hello               latest              df8b3c8897f9        8 seconds ago       1.65MB
 ```
 
-### 4.3.4 补充[#](https://www.cnblogs.com/uscWIFI/p/11917662.html#3187282935)
+### 4.3.4 补充
 
 - gcc -D可以定义宏，起到替换、条件编译的功能；即hello.c中定义了一个宏，我可以在gcc编译时使用-D替换该宏。就好像我docker镜像定义了一些变量，但是docker run仍可以-e传递变量，覆盖原有的变量
 - gcc -static指定强制使用静态库，
